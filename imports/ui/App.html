@@ -1,0 +1,102 @@
+<body >
+  <div class="container mt-5 "  >
+    {{!-- <button id="toggleMode" class="btn btn-primary"> <i class="fas fa-sun" id="icon"></i></button> --}}
+    <h1 class="text-dark text-center">Benefits of Surcharge vs Credit Card</h1>
+    {{> mainContainer}}
+  </div>
+</body>
+
+<template name="mainContainer">
+  <div class="container mt-4 calculator rounded shadow px-5 py-5" id="white" >
+    <div class="row  d-flex align-items-end ">
+
+      {{!-- column for inputs - first column --}}
+      <div class="input-section col-md-5 d-flex flex-column pt-4">
+        <div class="mb-2 mt-5">
+          <label for="monthly-sale" class="form-label fw-bold">What is your monthly sales volume?</label>
+          <div class="input-group shadow-sm rounded">
+            <span class="input-group-text fs-3">$</span>
+            <input type="text" class="form-control custom-font-size text-center monthly-sales bg-white" style="font-size: 3em;"
+              name="monthly-sale" required value="{{monthlySales}}" >
+          </div>
+          <div class="text-danger error" id="error-monthly"></div>
+        </div>
+
+        <div class="mb-2">
+          <label for="average-sale" class="form-label fw-bold">How much is your average sale?</label>
+          <div class="input-group shadow-sm rounded">
+            <span class="input-group-text fs-3">$</span>
+            <input type="text" class="form-control custom-font-size text-center average-sale bg-white" style="font-size: 3em;"
+              name="average-sale" required value="{{averageSale}}" >
+          </div>
+          <div class="text-danger error" id="error-average"></div>
+        </div>
+
+        <div class="mt-2">
+          <h5 class='text-left fw-bold fs-5'>How Much Will You Save With <span class="blue">PlatPay</span>?</h5>
+          <p class='text-left fs-6 fw-lighter'>
+            This calculator will help you compare costs between traditional providers like Stripe, PayPal, Square,
+            and PlatPay.
+          </p>
+          <button  class="button-yellow">Start Saving Now!</button>
+        </div>
+      </div>
+
+      
+      {{!-- culumn 2 --}}
+      <div class="col-md-7">
+        <div class="d-flex justify-content-end mb-4">
+           <div class="btn-group shadow" role="group" aria-label="Toggle Plans">
+            <button type="button" class="button {{isActiveMonthly}}" id="monthly-button">Monthly</button>
+            <button type="button" class="button {{isActiveYearly}}" id="yearly-button">Yearly </button>
+        </div>
+          {{!-- <h2><strong>Monthly | Yearly</strong></h2> --}}
+        </div>
+        <div class="box d-red text-center text-light shadow ">
+          <p class="fw-bold mb-0">Others Costs  <i class="fas fa-info-circle fa-xs" data-toggle="tooltip"
+              title="e.g. Stripe, PayPal, Square" data-placement="top" style="cursor: pointer;"></i></p>
+          <span id="other-monthly" class="big-font fw-bold">{{#if showMonthly}} {{otherMonthlyCost}} {{else}} {{otherYearlyCost}} {{/if}}</span>
+        </div>
+
+        <div class="box bg-blue text-center text-light shadow">
+          <p class="fw-bold mb-0">Our Costs  </p>
+          <span id="our-monthly" class="big-font fw-bold">  {{#if showMonthly}} {{ownMonthlyCost}} {{else}} {{ownYearlyCost}} {{/if}}</span>
+        </div>
+
+        <div class="blue-section mb-0"> 
+          <div class="box bg-green text-center text-light shadow mb-0">
+            <p class="fw-bold mb-0">Average Savings with PlatPay</p>
+            <span id="savings-monthly " class="big-font "> <strong>  {{#if showMonthly}} {{monthlySavings}} {{else}} {{yearlySavings}} {{/if}}</strong></span>
+          </div>
+        </div>
+      </div>
+
+      {{!-- column 3 --}}
+      {{!-- <div class="col-md-4">
+        <div class="d-flex justify-content-center mb-3">  
+          <h2><strong>Yearly</strong></h2>
+        </div>
+
+        <div class="box bg-other text-center text-light shadow">
+          <p class="fw-bold">Others Costs <i class="fas fa-info-circle fa-xs" data-toggle="tooltip"
+              title="e.g. Stripe, PayPal, Square, Authorize.net" data-placement="top"
+              style="cursor: pointer; font-color: black; "></i></p>
+          <span id="other-yearly" class="big-font text-secondary text-light">{{otherYearlyCost}}</span>
+        </div>
+
+        <div class="box bg-dark-blue text-center text-light shadow">
+          <p class="fw-bold">Our Costs</p>
+          <span id="our-yearly" class="big-font text-light">{{ownYearlyCost}}</span>
+        </div>
+
+        <div class="blue-section">
+          <div class="box bg-blue text-center text-light shadow mb-0">
+            <p class="fw-bold">Average Savings with PlatPay </p>
+            <span id="savings-yearly" class="big-font text-light"> <strong>{{yearlySavings}}</strong></span>
+          </div>
+        </div>
+      </div> --}}
+
+    </div>
+  </div>
+</template>
