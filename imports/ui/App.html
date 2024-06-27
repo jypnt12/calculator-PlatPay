@@ -12,12 +12,12 @@
     <div class="row  d-flex align-items-start  ">
 
       {{!-- column for inputs - first column --}}
-      <div class="input-section col-md-5 d-flex flex-column pt-4 px-4 pt-lg-4 align-items-start">
-        <div class="mb-2 mt-lg-4 col-12">
+      <div class="input-section col-md-5 d-flex flex-column pt-4 px-4 pt-lg-4 align-items-start font-dark">
+        <div class="mb-2 mt-lg-4 col-12 ">
           <label for="monthly-sale" class="form-label fw-bold ">What is your monthly sales volume?</label>
           <div class="input-group shadow-sm rounded">
-            <span class="input-group-text fs-3">$</span>
-            <input type="text" class="form-control custom-input text-center monthly-sales bg-white" 
+            <span class="input-group-text fs-3 text-muted">$</span>
+            <input type="text" class="form-control custom-input text-center monthly-sales" 
               name="monthly-sale" required value="{{monthlySales}}" >
           </div>
           <div class="text-danger error" id="error-monthly"></div>
@@ -26,8 +26,8 @@
         <div class="mb-2 col-12">
           <label for="average-sale" class="form-label fw-bold">How much is your average sale?</label>
           <div class="input-group shadow-sm ">
-            <span class="input-group-text fs-3">$</span>
-            <input type="text" class="form-control custom-input text-center average-sale bg-white" 
+            <span class="input-group-text fs-3 text-muted">$</span>
+            <input type="text" class="form-control custom-input text-center average-sale font-dark" 
               name="average-sale" required value="{{averageSale}}" >
           </div>
           <div class="text-danger error" id="error-average"></div>
@@ -53,41 +53,47 @@
           </div>
           {{!-- <h2><strong>Monthly | Yearly</strong></h2> --}}
         </div>
-        <div class="row">
-        <div class="col-lg-6">
-            <div class="box d-red text-center text-light shadow pt-4">
-              <p class="fw-bold mb-0">Others Costs  <i class="fas fa-info-circle fa-xs" data-toggle="tooltip"
-                  title="e.g. Stripe, PayPal, Square" data-placement="top" style="cursor: pointer;"></i></p>
-              <span id="other-monthly" class="big-font fw-bold">{{#if showYearly}} {{otherYearlyCost}} {{else}} {{ otherMonthlyCost}} {{/if}}</span>
-              <hr class="my-5">
-              <ul class="text-start mt-md-5 custom-list">
-                <li class="small ">A percentage fee of total sales volume (2.9%)</li>
-                <li>A fixed fee per credit card transaction ($0.30)</li>
-                <li>A higher fixed fee per check transaction ($0.80)</li>
-                <li>Assumes a distribution between types of transactions: 90% credit card transactions and 10% check transactions.</li>
-              </ul>
-              <p class="mt-md-5 foot-note">*Information as of June 27, 2024</p>
-            </div>
-          </div>
 
-          <div class="col-lg-6">
-            <div class="box bg-blue text-center text-light shadow py-5">
-              <p class="fw-bold mb-0">Our Costs  </p>
-              <span id="our-monthly" class="big-font fw-bold">  {{#if showYearly}} {{ownYearlyCost}} {{else}} {{ ownMonthlyCost}} {{/if}}</span>
-            </div>
+        <div class=" comparison-container">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="large-card d-red text-center text-light shadow pt-5  d-flex flex-column justify-content-between ">
 
-            <div class="blue-section mb-0"> 
-              <div class="box bg-green text-center text-light shadow mb-0 py-5">
-                <p class="fw-bold mb-0">Average Savings with PlatPay</p>
-                <span id="savings-monthly " class="big-font "> <strong>  {{#if showMonthly}} {{yearlySavings}} {{else}} {{ monthlySavings}} {{/if}}</strong></span>
+                  <div>
+                    <p class="fw-bold mb-0">Their Credit Card Costs <i class="fas fa-info-circle fa-xs" data-toggle="tooltip" title="e.g. Stripe, PayPal, Square" data-placement="top" style="cursor: pointer;"></i></p>
+                    <span id="other-monthly" class="big-font fw-bold">{{#if showYearly}} {{otherYearlyCost}} {{else}} {{otherMonthlyCost}} {{/if}}</span>
+                  </div>
+                  <hr>
+                  <div>
+                    <ul class="text-start custom-list my-2">
+                      <li class="small">A percentage fee of total sales volume (2.9%)</li>
+                      <li>A fixed fee per credit card transaction ($0.30)</li>
+                      <li>A higher fixed fee per check transaction ($0.80)</li>
+                      <li>Assumes a distribution between types of transactions: 90% credit card transactions and 10% check transactions.</li>
+                    </ul>
+                    <p class="foot-note">*Information as of June 27, 2024</p>
+                  </div>
+
+                </div>
               </div>
+
+              <div class="vs-symbol">vs</div>
+              <div class="col-lg-6 ">
+                <div class="small-card bg-blue text-center text-light shadow py-5 mb-3 mt-3 mt-lg-0">
+                  <p class="fw-bold mb-0">PlatPay Surcharge Costs</p>
+                  <span id="our-monthly" class="big-font fw-bold"> {{#if showYearly}} {{ownYearlyCost}} {{else}} {{ownMonthlyCost}} {{/if}}</span>
+                </div>
+
+                <div class="small-card bg-green text-center text-light shadow py-5">
+                  <p class="fw-bold mb-0">Savings with PlatPay Surcharge</p>
+                  <span id="savings-monthly" class="big-font"><strong> {{#if showYearly}} {{yearlySavings}} {{else}} {{monthlySavings}} {{/if}}</strong></span>
+                </div>
+              </div>
+
+
+
             </div>
-            {{!-- <div class="mt-4 d-flex justify-content-center ">
-            <button  class="button-yellow d-none d-md-block">Start Saving Now!</button>
-          </div> --}}
           </div>
-          
-        </div>
        
 
         
