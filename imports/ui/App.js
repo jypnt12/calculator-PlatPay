@@ -71,6 +71,11 @@ function parseNumberWithCommas(inputString) {
 		return '-'
 	}
   }
+
+  function scrollToBottom() {
+    var element = document.getElementById("scroll-to-bottom");
+    element.scrollTop = element.scrollHeight;
+}
   
 Template.mainContainer.onCreated(function mainContainerOnCreated() {
 	this.monthlySales = new ReactiveVar(10000); 
@@ -82,8 +87,8 @@ Template.mainContainer.onCreated(function mainContainerOnCreated() {
 	this.otherYearlyCost = new ReactiveVar(0);
 	this.yearlySavings = new ReactiveVar(0);
 
-	this.showMonthly = new ReactiveVar(true);
-  	this.showYearly = new ReactiveVar(false);
+	this.showMonthly = new ReactiveVar(false);
+  	this.showYearly = new ReactiveVar(true);
 });
 
 Template.mainContainer.onRendered(function() {
@@ -194,7 +199,7 @@ Template.mainContainer.events({
 		templateInstance.ownYearlyCost.set(Math.round(costsOurs * 12));
 		templateInstance.otherYearlyCost.set(Math.round(costsOther * 12));
 		templateInstance.yearlySavings.set(Math.round((costsOther - costsOurs) * 12));
-			  
+		scrollToBottom();
 	  },
 
 });

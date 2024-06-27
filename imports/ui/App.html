@@ -1,77 +1,101 @@
 <body >
-  <div class="container mt-5 "  >
+  <div class="container mt-5 " >
     {{!-- <button id="toggleMode" class="btn btn-primary"> <i class="fas fa-sun" id="icon"></i></button> --}}
     
     <h1 class="text-dark text-center">Benefits of Surcharge vs Credit Card</h1>
     {{> mainContainer}}
-  </div>
+  </div> 
 </body>
 
 <template name="mainContainer">
-  <div class="container mt-4 calculator rounded shadow px-5 py-5" id="white" >
-    <div class="row  d-flex align-items-end ">
+  <div class="container mt-3 calculator rounded shadow p-md-5" >
+    <div class="row  d-flex align-items-start  ">
 
       {{!-- column for inputs - first column --}}
-      <div class="input-section col-md-5 d-flex flex-column pt-4">
-        <div class="mb-2 mt-5">
-          <label for="monthly-sale" class="form-label fw-bold">What is your monthly sales volume?</label>
+      <div class="input-section col-md-5 d-flex flex-column pt-4 px-4 pt-lg-4 align-items-start">
+        <div class="mb-2 mt-lg-4 col-12">
+          <label for="monthly-sale" class="form-label fw-bold ">What is your monthly sales volume?</label>
           <div class="input-group shadow-sm rounded">
             <span class="input-group-text fs-3">$</span>
-            <input type="text" class="form-control custom-font-size text-center monthly-sales bg-white" style="font-size: 3em;"
+            <input type="text" class="form-control custom-input text-center monthly-sales bg-white" 
               name="monthly-sale" required value="{{monthlySales}}" >
           </div>
           <div class="text-danger error" id="error-monthly"></div>
         </div>
 
-        <div class="mb-2">
+        <div class="mb-2 col-12">
           <label for="average-sale" class="form-label fw-bold">How much is your average sale?</label>
-          <div class="input-group shadow-sm rounded">
+          <div class="input-group shadow-sm ">
             <span class="input-group-text fs-3">$</span>
-            <input type="text" class="form-control custom-font-size text-center average-sale bg-white" style="font-size: 3em;"
+            <input type="text" class="form-control custom-input text-center average-sale bg-white" 
               name="average-sale" required value="{{averageSale}}" >
           </div>
           <div class="text-danger error" id="error-average"></div>
         </div>
 
         <div class="mt-2">
-          <h5 class='text-left fw-bold fs-5'>How Much Will You Save With <span class="blue">PlatPay</span>?</h5>
+          <h5 class='text-left fw-bold fs-6'>How Much Will You Save With <span class="blue">PlatPay</span>?</h5>
           <p class='text-left fs-6 fw-lighter'>
             This calculator will help you compare costs between traditional providers like Stripe, PayPal, Square,
             and PlatPay.
           </p>
-          <button  class="button-yellow">Start Saving Now!</button>
+          <button  class="button-yellow d-none d-md-block">Start Saving Now!</button>
         </div>
       </div>
 
       
       {{!-- culumn 2 --}}
-      <div class="col-md-7">
-        <div class="d-flex justify-content-end mb-4">
-           <div class="btn-group shadow" role="group" aria-label="Toggle Plans">
-            <button type="button" class="button {{isActiveMonthly}}" id="monthly-button">Monthly</button>
+      <div class="col-md-7 my-md-0 my-5">
+        <div class="d-flex justify-content-center  mb-4">
+          <div class="btn-group shadow" role="group" >
             <button type="button" class="button {{isActiveYearly}}" id="yearly-button">Yearly </button>
-        </div>
+            <button type="button" class="button {{isActiveMonthly}}" id="monthly-button">Monthly</button>
+          </div>
           {{!-- <h2><strong>Monthly | Yearly</strong></h2> --}}
         </div>
-        <div class="box d-red text-center text-light shadow ">
-          <p class="fw-bold mb-0">Others Costs  <i class="fas fa-info-circle fa-xs" data-toggle="tooltip"
-              title="e.g. Stripe, PayPal, Square" data-placement="top" style="cursor: pointer;"></i></p>
-          <span id="other-monthly" class="big-font fw-bold">{{#if showMonthly}} {{otherMonthlyCost}} {{else}} {{otherYearlyCost}} {{/if}}</span>
-        </div>
-
-        <div class="box bg-blue text-center text-light shadow">
-          <p class="fw-bold mb-0">Our Costs  </p>
-          <span id="our-monthly" class="big-font fw-bold">  {{#if showMonthly}} {{ownMonthlyCost}} {{else}} {{ownYearlyCost}} {{/if}}</span>
-        </div>
-
-        <div class="blue-section mb-0"> 
-          <div class="box bg-green text-center text-light shadow mb-0">
-            <p class="fw-bold mb-0">Average Savings with PlatPay</p>
-            <span id="savings-monthly " class="big-font "> <strong>  {{#if showMonthly}} {{monthlySavings}} {{else}} {{yearlySavings}} {{/if}}</strong></span>
+        <div class="row">
+        <div class="col-lg-6">
+            <div class="box d-red text-center text-light shadow pt-4">
+              <p class="fw-bold mb-0">Others Costs  <i class="fas fa-info-circle fa-xs" data-toggle="tooltip"
+                  title="e.g. Stripe, PayPal, Square" data-placement="top" style="cursor: pointer;"></i></p>
+              <span id="other-monthly" class="big-font fw-bold">{{#if showYearly}} {{otherYearlyCost}} {{else}} {{ otherMonthlyCost}} {{/if}}</span>
+              <hr class="my-5">
+              <ul class="text-start mt-md-5 custom-list">
+                <li class="small ">A percentage fee of total sales volume (2.9%)</li>
+                <li>A fixed fee per credit card transaction ($0.30)</li>
+                <li>A higher fixed fee per check transaction ($0.80)</li>
+                <li>Assumes a distribution between types of transactions: 90% credit card transactions and 10% check transactions.</li>
+              </ul>
+              <p class="mt-md-5 foot-note">*Information as of June 27, 2024</p>
+            </div>
           </div>
+
+          <div class="col-lg-6">
+            <div class="box bg-blue text-center text-light shadow py-5">
+              <p class="fw-bold mb-0">Our Costs  </p>
+              <span id="our-monthly" class="big-font fw-bold">  {{#if showYearly}} {{ownYearlyCost}} {{else}} {{ ownMonthlyCost}} {{/if}}</span>
+            </div>
+
+            <div class="blue-section mb-0"> 
+              <div class="box bg-green text-center text-light shadow mb-0 py-5">
+                <p class="fw-bold mb-0">Average Savings with PlatPay</p>
+                <span id="savings-monthly " class="big-font "> <strong>  {{#if showMonthly}} {{yearlySavings}} {{else}} {{ monthlySavings}} {{/if}}</strong></span>
+              </div>
+            </div>
+            {{!-- <div class="mt-4 d-flex justify-content-center ">
+            <button  class="button-yellow d-none d-md-block">Start Saving Now!</button>
+          </div> --}}
+          </div>
+          
+        </div>
+       
+
+        
+        <div class="mt-5 d-flex justify-content-center d-md-none">
+          <button  class="button-yellow d-md-block d-md-none">Start Saving Now!</button>
         </div>
       </div>
-
+      
       {{!-- column 3 --}}
       {{!-- <div class="col-md-4">
         <div class="d-flex justify-content-center mb-3">  
@@ -99,5 +123,6 @@
       </div> --}}
 
     </div>
+
   </div>
 </template>
